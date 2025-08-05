@@ -1,0 +1,72 @@
+[project]
+name = "infocenter"
+readme = "README.md"
+requires-python = ">= 3.12"
+version = "2.2.4"
+dependencies = [
+  "pydbus",
+]
+
+[tool.setuptools]
+py-modules = []
+
+# Exclude a variety of commonly ignored directories.
+[tool.ruff]
+exclude = [
+    ".git",
+]
+
+[tool.ruff.lint]
+select = [
+    "ALL",
+]
+ignore = [
+    "ANN001",
+    "ANN002",
+    "ANN003",
+    "ANN201",
+    "ANN202",
+    "ANN204",
+    "BLE001",
+    "COM812",
+    "C901",
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D105",
+    "D106",
+    "D107",
+    "D203",
+    "D213",
+    "D401",
+    "ISC001",
+    "FBT001",
+    "FBT002",
+    "FBT003",
+    "FIX001",
+    "FIX002",
+    "INP001",
+    "INT001",
+    "INT002",
+    "PERF203",
+    "PGH003",
+    "PLR0911",
+    "PLR0912",
+    "PLR0913",
+    "RUF001",
+    "RUF012",
+    "SIM108",
+    "TD001",
+    "TD002",
+    "TD003",
+    "TD004",
+    "UP032",
+    "LOG015",
+    "TC006",
+]
+
+[tool.mypy]
+ignore_missing_imports = true
+disallow_incomplete_defs = true
+explicit_package_bases = true

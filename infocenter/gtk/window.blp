@@ -1,0 +1,226 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $Window: Adw.ApplicationWindow {
+  title: _("Information Center");
+  default-width: 800;
+  default-height: 600;
+  width-request: 360;
+  height-request: 200;
+
+  Adw.Breakpoint {
+    condition ("max-width: 500sp")
+
+    setters {
+      header_bar.title-widget: null;
+      switcher_bar.reveal: true;
+    }
+  }
+
+  content: Adw.ToolbarView view {
+    [top]
+    Adw.HeaderBar header_bar {
+      title-widget: Adw.ViewSwitcher switcher {
+        stack: stack;
+        policy: wide;
+      };
+
+      [end]
+      MenuButton {
+        primary: true;
+        icon-name: "open-menu-symbolic";
+        tooltip-text: _("Menu");
+        menu-model: primary_menu;
+      }
+    }
+
+    content: Adw.ViewStack stack {
+      Adw.ViewStackPage support_view_stack_page {
+        name: "support";
+        title: _("Support");
+        icon-name: "help-faq-symbolic";
+        use-underline: true;
+
+        child: Adw.PreferencesPage {
+          Adw.PreferencesGroup {
+            FlowBox flowbox {
+              orientation: horizontal;
+              row-spacing: 6;
+              column-spacing: 10;
+              min-children-per-line: 3;
+            }
+          }
+
+          Adw.PreferencesGroup ehd_preferences_group {
+            $ActionRow mail_action_row {
+              title: _("Mail");
+
+              [suffix]
+              Gtk.LinkButton mail_link_button {
+                styles [
+                  "flat"
+                ]
+
+                icon-name: "mail-send-symbolic";
+              }
+            }
+
+            $ActionRow phone_action_row {
+              title: _("Phone");
+
+              [suffix]
+              Gtk.LinkButton phone_link_button {
+                styles [
+                  "flat"
+                ]
+
+                icon-name: "call-start-symbolic";
+              }
+            }
+          }
+
+          Adw.PreferencesGroup system_information_preferences_group {
+            title: _("System Information");
+
+            $ActionRow computer_name_action_row {
+              title: _("Computer Name");
+            }
+
+            $ActionRow fqdn_action_row {
+              title: _("FQDN");
+            }
+
+            $ActionRow user_name_action_row {
+              title: _("User Name");
+            }
+
+            $ActionRow os_action_row {
+              title: _("OS");
+            }
+
+            $ActionRow hardware_model_action_row {
+              title: _("Hardware Model");
+            }
+
+            $ActionRow bios_action_row {
+              title: _("BIOS");
+            }
+
+            $ActionRow cpu_action_row {
+              title: _("CPU");
+            }
+
+            $ActionRow kernel_action_row {
+              title: _("Kernel");
+            }
+          }
+
+          Adw.PreferencesGroup client_preferences_group {
+          }
+        };
+      }
+
+      Adw.ViewStackPage system_checks_view_stack_page {
+        name: "system_checks";
+        title: _("System Checks");
+        icon-name: "test-symbolic";
+        use-underline: true;
+
+        child: Adw.PreferencesPage {
+          Adw.PreferencesGroup proxy_preferences_group {
+            title: _("Zscaler Checks");
+            description: _("System checks whether the Zscaler is properly set up and running");
+
+            Adw.ActionRow {
+              title: _("Running");
+              subtitle: _("Check whether Zscaler is running");
+
+              [suffix]
+              Label zscaler_service_label {}
+            }
+
+            Adw.ActionRow {
+              title: _("Proxy");
+              subtitle: _("Check whether the proxy port is accessible");
+
+              [suffix]
+              Label proxy_port_label {}
+            }
+
+            Adw.ActionRow {
+              title: _("PAC-File");
+              subtitle: _("Check whether the PAC file is valid");
+
+              [suffix]
+              Label pac_file_label {}
+            }
+          }
+
+          Adw.PreferencesGroup vpn_preferences_group {
+            title: _("VPN Checks");
+            description: _("System checks whether VPN is correctly set up and running");
+
+            Adw.ActionRow {
+              title: _("VPN");
+
+              [suffix]
+              Label vpn_label {}
+            }
+          }
+        };
+      }
+
+      Adw.ViewStackPage disclaimer_view_stack_page {
+        name: "disclaimer";
+        title: _("Disclaimer");
+        icon-name: "accessories-text-editor-symbolic";
+        use-underline: true;
+
+        child: Adw.Clamp {
+          margin-top: 24;
+          margin-bottom: 12;
+          margin-start: 12;
+          margin-end: 12;
+
+          child: Box {
+            orientation: vertical;
+            spacing: 12;
+            vexpand: true;
+
+            Box disclaimer_text_box {
+              orientation: vertical;
+              vexpand: true;
+            }
+
+            Button autostart_checkbutton {
+              label: _("Disable disclaimer on startup");
+              visible: false;
+              halign: center;
+              clicked => $on_autostart_checkbutton();
+              styles [ "pill" ]
+            }
+          };
+        };
+      }
+    };
+
+    [bottom]
+    Adw.ViewSwitcherBar switcher_bar {
+      stack: stack;
+    }
+  };
+}
+
+menu primary_menu {
+  section {
+    item {
+      label: _("Export Journal…");
+      action: 'app.journal';
+    }
+
+    item {
+      label: _("About Information Center");
+      action: 'app.about';
+    }
+  }
+}

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Information Center
+Exec=infocenter --autostart
+Icon=de.volkswagen.infocenter
+Terminal=false
+Type=Application
+Categories=System;GTK;
+NoDisplay=true
+StartupNotify=true

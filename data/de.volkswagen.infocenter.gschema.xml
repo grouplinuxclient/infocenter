@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="infocenter">
+  <schema id="de.volkswagen.infocenter" path="/de/volkswagen/infocenter/">
+    <key type="b" name="do-not-show-again">
+      <default>false</default>
+      <summary>Do not autostart again</summary>
+      <description>Whether this application should be autostarted.</description>
+    </key>
+  </schema>
+</schemalist>

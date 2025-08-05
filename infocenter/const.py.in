@@ -1,0 +1,5 @@
+#!@PYTHON@
+
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+PKGDATADIR = "@DATA_DIR@"

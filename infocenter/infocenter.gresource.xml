@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/de/volkswagen/infocenter">
+    <file>yaml/en/quicklinks.yaml</file>
+    <file>yaml/en/support.yaml</file>
+    <file>yaml/en/client.yaml</file>
+    <file>yaml/en/disclaimer.yaml</file>
+    <!-- <file>yaml/de/quicklinks.yaml</file> -->
+    <!-- <file>yaml/de/support.yaml</file> -->
+    <!-- <file>yaml/de/client.yaml</file> -->
+    <!-- <file>yaml/de/disclaimer.yaml</file> -->
+    <file preprocess="xml-stripblanks">gtk/window.ui</file>
+    <file preprocess="xml-stripblanks">gtk/action-row.ui</file>
+    <file preprocess="xml-stripblanks">gtk/disclaimer.ui</file>
+    <file preprocess="xml-stripblanks">gtk/quicklink.ui</file>
+    <file compressed="true">about_dialog.ui</file>
+  </gresource>
+</gresources>

@@ -1,0 +1,163 @@
+# German translations for de.volkswagen.infocenter package.
+# Copyright (C) 2024-2025 Malte Borgmann, Jan-Michael Brummer
+# This file is distributed under the same license as the de.volkswagen.infocenter package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: de.volkswagen.infocenter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-05 10:33+0200\n"
+"PO-Revision-Date: 2024-07-08 10:17+0200\n"
+"Last-Translator: Malte Borgmann\n"
+"Language-Team: Malte Borgmann\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: data/de.volkswagen.infocenter.desktop.in:2
+#: data/de.volkswagen.infocenter.metainfo.xml.in:7
+#: data/de.volkswagen.infocenter.metainfo.xml.in:8
+#: data/de.volkswagen.infocenter.metainfo.xml.in:10 infocenter/gtk/window.blp:5
+msgid "Information Center"
+msgstr "Information Center"
+
+#: data/de.volkswagen.infocenter.gschema.xml:6
+msgid "Do not autostart again"
+msgstr "Nicht erneut automatisch starten"
+
+#: data/de.volkswagen.infocenter.gschema.xml:7
+msgid "Whether this application should be autostarted."
+msgstr "Ob diese Anwendung automatisch gestartet werden soll."
+
+#: infocenter/main.py:69
+msgid "Export Journal to File"
+msgstr "Exportiere Journal in Datei"
+
+#: infocenter/window.py:205
+msgid "Success"
+msgstr "Erfolgreich"
+
+#: infocenter/window.py:208
+msgid "Failed"
+msgstr "Fehlgeschlagen"
+
+#: infocenter/gtk/window.blp:32
+msgid "Menu"
+msgstr "Menü"
+
+#: infocenter/gtk/window.blp:40
+msgid "Support"
+msgstr "Support"
+
+#: infocenter/gtk/window.blp:56
+msgid "Mail"
+msgstr "Mail"
+
+#: infocenter/gtk/window.blp:69
+msgid "Phone"
+msgstr "Telefon"
+
+#: infocenter/gtk/window.blp:83
+msgid "System Information"
+msgstr "Systeminformationen"
+
+#: infocenter/gtk/window.blp:86
+msgid "Computer Name"
+msgstr "Computername"
+
+#: infocenter/gtk/window.blp:90
+msgid "FQDN"
+msgstr "FQDN"
+
+#: infocenter/gtk/window.blp:94
+msgid "User Name"
+msgstr "Benutzername"
+
+#: infocenter/gtk/window.blp:98
+msgid "OS"
+msgstr "Betriebssystem"
+
+#: infocenter/gtk/window.blp:102
+msgid "Hardware Model"
+msgstr "Hardware Modell"
+
+#: infocenter/gtk/window.blp:106
+msgid "BIOS"
+msgstr "BIOS"
+
+#: infocenter/gtk/window.blp:110
+msgid "CPU"
+msgstr "CPU"
+
+#: infocenter/gtk/window.blp:114
+msgid "Kernel"
+msgstr "Kernel"
+
+#: infocenter/gtk/window.blp:125
+msgid "System Checks"
+msgstr "Systemtests"
+
+#: infocenter/gtk/window.blp:131
+msgid "Zscaler Checks"
+msgstr "Zscaler Test"
+
+#: infocenter/gtk/window.blp:132
+msgid "System checks whether the Zscaler is properly set up and running"
+msgstr "Prüft ob der ZScaler eingerichtet ist und läuft"
+
+#: infocenter/gtk/window.blp:135
+msgid "Running"
+msgstr "Läuft"
+
+#: infocenter/gtk/window.blp:136
+msgid "Check whether Zscaler is running"
+msgstr "Prüft ob Zscaler läuft"
+
+#: infocenter/gtk/window.blp:143
+msgid "Proxy"
+msgstr "Proxy"
+
+#: infocenter/gtk/window.blp:144
+msgid "Check whether the proxy port is accessible"
+msgstr "Prüft ob Porxyport erreichbar ist"
+
+#: infocenter/gtk/window.blp:151
+msgid "PAC-File"
+msgstr "PAC Datei"
+
+#: infocenter/gtk/window.blp:152
+msgid "Check whether the PAC file is valid"
+msgstr "Prüft ob die PAC Datei gültig ist"
+
+#: infocenter/gtk/window.blp:160
+msgid "VPN Checks"
+msgstr "VPN Test"
+
+#: infocenter/gtk/window.blp:161
+msgid "System checks whether VPN is correctly set up and running"
+msgstr "Prüft ob der VPN eingerichtet ist und läuft"
+
+#: infocenter/gtk/window.blp:164
+msgid "VPN"
+msgstr "VPN"
+
+#: infocenter/gtk/window.blp:175
+msgid "Disclaimer"
+msgstr "Rechtshinweis"
+
+#: infocenter/gtk/window.blp:196
+msgid "Disable disclaimer on startup"
+msgstr "Rechtshinweis beim Start deaktivieren"
+
+#: infocenter/gtk/window.blp:217
+msgid "Export Journal…"
+msgstr "Journal exportieren…"
+
+#: infocenter/gtk/window.blp:222
+msgid "About Information Center"
+msgstr "Info zu Information Center"
+
+#~ msgid "Never show again"
+#~ msgstr "Nicht mehr anzeigen"

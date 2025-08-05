@@ -1,0 +1,8 @@
+.vscode
+subprojects/blueprint-compiler
+.ruff_cache
+vscode-blueprint
+.flatpak
+.idea/
+build/
+.mypy_cache/

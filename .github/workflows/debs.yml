@@ -1,0 +1,37 @@
+name: Debian packages
+permissions:
+  contents: read
+  pull-requests: write
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-debs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+
+      - name: Update debian changelog
+        run: |
+          sudo apt-get update
+          sudo apt-get install devscripts
+          debchange -v "`git describe --tags | sed -e "s|v||"`" -b -M --distribution noble "ci build"
+
+      - name: Build deb packages
+        uses: jtdor/build-deb-action@77e660b49ec8a92ef36e28f577317e8577a10e3e  # v1.9.0
+        env:
+          DEB_BUILD_OPTIONS: noautodbgsym
+        with:
+          docker-image: ubuntu:noble
+          buildpackage-opts: --build=binary --no-sign
+          extra-build-deps: blueprint-compiler gtk-update-icon-cache gobject-introspection libgtk-4-dev libadwaita-1-dev git python3-pydbus
+
+      - name: Upload deb files
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08  # v4.6.0
+        with:
+          name: "deb-packages"
+          path: ./debian/artifacts/*.deb

@@ -1,0 +1,3 @@
+- title: Personal data in BASH 
+  body: |
+    Please note that data entered in the BASH (Unix Shell) command line is logged locally. Please refrain from entering personal data in particular, unless this is absolutely necessary. The logged data is regularly overwritten and can be deleted by the user at any time.

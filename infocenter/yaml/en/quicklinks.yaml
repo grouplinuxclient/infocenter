@@ -1,0 +1,18 @@
+- title: Password
+  icon: dialog-password-symbolic
+  uri: https://password/
+- title: Ticket
+  icon: document-edit-symbolic
+  uri: https://ticket
+- title: Order
+  icon: video-display-symbolic
+  uri: https://order
+- title: Intranet
+  icon: preferences-system-network-symbolic
+  uri: https://intranet/
+- title: My IT
+  icon: face-monkey-symbolic
+  uri: http://myit
+- title: Wiki
+  icon: user-info-symbolic
+  uri: https://wiki/

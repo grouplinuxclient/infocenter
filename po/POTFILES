@@ -1,0 +1,15 @@
+data/de.volkswagen.infocenter.desktop.in
+data/de.volkswagen.infocenter.gschema.xml
+data/de.volkswagen.infocenter.metainfo.xml.in
+infocenter/action_row.py
+infocenter/disclaimer.py
+infocenter/edid.py
+infocenter/main.py
+infocenter/quicklink.py
+infocenter/system_information_provider.py
+infocenter/system_check.py
+infocenter/window.py
+infocenter/gtk/action-row.blp
+infocenter/gtk/disclaimer.blp
+infocenter/gtk/quicklink.blp
+infocenter/gtk/window.blp

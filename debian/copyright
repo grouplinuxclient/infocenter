@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: infocenter
+Upstream-Contact: Jan-Michael Brummer <jan-michael.brummer1@volkswagen.de>
+Source: https://github.com/grouplinuxclient/infocenter
+
+Files: *
+Copyright: 2021-2025 Jan-Michael Brummer <jan-michael.brummer1@volkswagen.de>
+License: GPL-2.0

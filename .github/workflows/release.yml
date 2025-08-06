@@ -36,6 +36,17 @@ jobs:
           name: packages
           path: ./debian/artifacts/*.deb
 
+      - name: Build rpm packages
+        uses: janbrummer/build-rpm-action@main
+        with:
+          spec-file: "infocenter.spec"
+
+      - name: Upload rpm files
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08  # v4.6.0
+        with:
+          name: "rpm-packages"
+          path: ./rpm/artifacts/
+
   create_release:
     name: Create Release
     needs: [packaging]

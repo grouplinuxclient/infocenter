@@ -39,7 +39,7 @@ jobs:
   create_release:
     name: Create Release
     needs: [packaging]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Get version

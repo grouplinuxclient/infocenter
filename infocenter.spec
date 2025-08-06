@@ -9,7 +9,14 @@ BuildRequires:  meson
 BuildRequires:  python-rpm-macros
 BuildRequires:  python3-devel >= 3.6
 BuildRequires:  python3-distro
+BuildRequires:  python3-pydbus
+BuildRequires:  blueprint-compiler
+BuildRequires:  gtk-update-icon-cache
+BuildRequires:  desktop-file-utils
+BuildRequires:  gtk4
+BuildRequires:  libadwaita-devel
 Requires:       python3 >= 3.6
+Requires:       python3-pydbus
 Recommends:     python3-distro
 Recommends:     python3-dnspython
 Recommends:     python3-netifaces

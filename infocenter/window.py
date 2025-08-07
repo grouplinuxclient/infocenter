@@ -142,6 +142,8 @@ class Window(Adw.ApplicationWindow):
             return
 
         client_yml = yaml.safe_load(resource.get_data())
+        if not client_yml:
+            return
 
         self.client_preferences_group.set_title(client_yml["title"])
 

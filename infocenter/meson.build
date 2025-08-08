@@ -34,7 +34,7 @@ gnome.compile_resources('infocenter',
 )
 
 python = import('python')
-python3 = python.find_installation('python3', modules: ['pydbus'])
+python3 = python.find_installation('python3')
 
 conf = configuration_data()
 conf.set('PYTHON', python3.full_path())

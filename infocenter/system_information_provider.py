@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 import os
-from infocenter.edid import get_edid
+from infocenter.edid import get_edid_sysfs
 
 
 def get_os() -> str:
@@ -63,7 +63,7 @@ def get_kernel_version() -> str:
 
 
 def get_monitor_list() -> list:
-    monitor_data = get_edid()
+    monitor_data = get_edid_sysfs()
     return monitor_data
 
 

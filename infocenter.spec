@@ -9,18 +9,24 @@ BuildRequires:  meson
 BuildRequires:  python-rpm-macros
 BuildRequires:  python3-devel >= 3.6
 BuildRequires:  python3-distro
-BuildRequires:  python3-pydbus
+
+%if 0%{?rhel}
+
+%if %rhel > 9
 BuildRequires:  blueprint-compiler
+%endif
+
+%else
+BuildRequires:  blueprint-compiler
+%endif
+
 BuildRequires:  gtk-update-icon-cache
 BuildRequires:  desktop-file-utils
 BuildRequires:  gtk4
+BuildRequires:  python3-gobject
 BuildRequires:  libadwaita-devel
 Requires:       python3 >= 3.6
-Requires:       python3-pydbus
 Recommends:     python3-distro
-Recommends:     python3-dnspython
-Recommends:     python3-netifaces
-Recommends:     python3-pycryptodomex
 BuildArch:      noarch
 
 %description

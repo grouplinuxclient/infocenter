@@ -3,6 +3,7 @@
 import glob
 import struct
 from collections import namedtuple
+from gettext import gettext as _
 from typing import Tuple
 
 _STRUCT_FORMAT = (
@@ -92,9 +93,6 @@ def parse_edid(edid: bytes) -> Tuple[str, str]:
     elif raw_edid.description_4[3] == 0xFF:
         serial = str(raw_edid.description_4[5:17].decode()).strip()
 
-    print("Model Number: " + model)
-    print("Serial Number: " + serial)
-
     return model, serial
 
 
@@ -106,27 +104,18 @@ def get_edid_sysfs():
             try:
                 data = file.read(128)
                 model, serial = parse_edid(data)
-                if len(model) > 0 and len(serial) > 0:
-                    monitor_data.append((model, serial))
+                if len(model) > 0:
+                    monitor_model = model
+                else:
+                    monitor_model = _("Unknown")
+
+                if len(serial) > 0:
+                    monitor_serial = serial
+                else:
+                    monitor_serial = _("Unknown")
+
+                monitor_data.append((monitor_model, monitor_serial))
             except struct.error:
-                print("Not parsing: " + filename)
-
-    return monitor_data
-
-
-def get_edid():
-    from pydbus import SessionBus
-
-    monitor_data = []
-    bus = SessionBus()
-    display_config = bus.get(
-        "org.gnome.Mutter.DisplayConfig", "/org/gnome/Mutter/DisplayConfig"
-    )
-
-    data = display_config.GetResources()
-
-    for display in data[2:][0]:
-        info = display[7]
-        monitor_data.append((info["product"], info["serial"]))
+                pass
 
     return monitor_data

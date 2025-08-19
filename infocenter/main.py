@@ -1,8 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-from gettext import gettext as _
 from pathlib import Path
-import infocenter.system_check as system_check
 import sys
 import gi
 
@@ -26,7 +24,6 @@ class Application(Adw.Application):
         self.autostart = False
         self.create_action("quit", lambda *_: self.quit(), ["<primary>q"])
         self.create_action("about", self.on_about_action)
-        self.create_action("journal", self.on_journal_action)
         self.add_main_option(
             "autostart",
             ord("a"),
@@ -59,25 +56,6 @@ class Application(Adw.Application):
             win = Window(application=self)
 
         win.present()
-
-    def on_journal_action(self, widget, _unused):
-        """
-        Action for journal export in menu button
-        """
-        dialog = Gtk.FileDialog(
-            accept_label="Export",
-            title=_("Export Journal to File"),
-            initial_name="journal.txt",
-            modal=True,
-        )
-
-        def response(dialog, result):
-            if result.had_error():
-                return
-            filepath = Path(dialog.save_finish(result).get_path())
-            system_check.write_journal(filepath)
-
-        dialog.save(parent=self.props.active_window, callback=response)
 
     def on_about_action(self, widget, _):
         """Invoked when we click "about" in the main menu."""

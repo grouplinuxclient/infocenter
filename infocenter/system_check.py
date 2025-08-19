@@ -1,8 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
+import os
 import socket
-import subprocess
-
 import requests
 
 
@@ -51,14 +50,11 @@ def check_zscaler_service(service: str = "zsaservice") -> bool:
         service (str, optional): Defaults to "zsaservice"
 
     Returns:
-        bool: Returns true if Zsacler service is running
+        bool: Returns true if Zscaler service is running
     """
     try:
-        process = subprocess.Popen(
-            ["systemctl", "is-active", service], stdout=subprocess.PIPE
-        )
-        (result, err) = process.communicate()
-        return result.decode("utf-8").strip().__eq__("active")
+        ret = os.system("systemctl is-active " + service + "  > /dev/null")
+        return ret == 0
     except FileNotFoundError:
         return False
 

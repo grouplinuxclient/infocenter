@@ -76,10 +76,3 @@ def check_vpn() -> bool:
         return any(i in names for i in ("gpd0", "vpn0", "tun0"))
     except ValueError:
         return False
-
-
-def write_journal(path: str) -> None:
-    journal = subprocess.Popen(["journalctl", "-b"], stdout=subprocess.PIPE)
-    (result, err) = journal.communicate()
-    with open(path, mode="w") as file:
-        file.write(result.decode("utf-8"))

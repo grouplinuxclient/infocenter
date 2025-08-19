@@ -131,6 +131,13 @@ class Window(Adw.ApplicationWindow):
                 ActionRow("Monitor " + str(index), monitor[0])
             )
 
+        for index, card in enumerate(
+            system_information_provider.get_graphic_card_list()
+        ):
+            self.system_information_preferences_group.add(
+                ActionRow("Graphic Card " + str(index), card)
+            )
+
     def add_client_information(self):
         """
         Adds Client Information and provides an overview over the business client.

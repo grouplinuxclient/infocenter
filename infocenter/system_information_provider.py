@@ -74,3 +74,19 @@ def get_language_short_code() -> str:
         return lang[:2]
 
     return "en"
+
+
+def get_graphic_card_list() -> list:
+    from pydbus import SystemBus
+
+    graphics_data = []
+    bus = SystemBus()
+    switcheroo_config = bus.get(
+        "net.hadess.SwitcherooControl", "/net/hadess/SwitcherooControl"
+    )
+
+    gpus = switcheroo_config.GPUs
+    for gpu in gpus:
+        graphics_data.append(gpu["Name"])
+
+    return graphics_data

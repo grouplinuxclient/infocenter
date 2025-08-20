@@ -2,6 +2,7 @@
 
 import os
 from infocenter.edid import get_edid_sysfs
+from gi.repository import Gio
 
 
 def get_os() -> str:
@@ -77,15 +78,24 @@ def get_language_short_code() -> str:
 
 
 def get_graphic_card_list() -> list:
-    from pydbus import SystemBus
+    con = Gio.bus_get_sync(Gio.BusType.SYSTEM, None)
 
-    graphics_data = []
-    bus = SystemBus()
-    switcheroo_config = bus.get(
-        "net.hadess.SwitcherooControl", "/net/hadess/SwitcherooControl"
+    control_proxy = Gio.DBusProxy.new_sync(
+        con,
+        Gio.DBusProxyFlags.NONE,
+        None,
+        "net.hadess.SwitcherooControl",
+        "/net/hadess/SwitcherooControl",
+        "net.hadess.SwitcherooControl",
+        None,
     )
 
-    gpus = switcheroo_config.GPUs
+    if control_proxy is None:
+        return []
+
+    gpus = control_proxy.get_cached_property("GPUs")
+    graphics_data = []
+
     for gpu in gpus:
         graphics_data.append(gpu["Name"])
 

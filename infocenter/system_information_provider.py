@@ -29,6 +29,13 @@ def get_hardware_model() -> str:
     return hardware_model
 
 
+def get_chassis_asset() -> str:
+    asset_tag = "Unknown"
+    with open("/sys/devices/virtual/dmi/id/chassis_asset_tag") as file:
+        asset_tag = file.read().strip()
+    return asset_tag
+
+
 def get_bios_version() -> str:
     bios_version = "Unknown"
     with open("/sys/devices/virtual/dmi/id/bios_version") as file:

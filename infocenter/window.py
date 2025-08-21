@@ -47,6 +47,7 @@ class Window(Adw.ApplicationWindow):
     user_name_action_row = Gtk.Template.Child()
     os_action_row = Gtk.Template.Child()
     hardware_model_action_row = Gtk.Template.Child()
+    board_asset_tag_action_row = Gtk.Template.Child()
     bios_action_row = Gtk.Template.Child()
     cpu_action_row = Gtk.Template.Child()
     kernel_action_row = Gtk.Template.Child()
@@ -117,6 +118,9 @@ class Window(Adw.ApplicationWindow):
         self.os_action_row.set_subtitle(system_information_provider.get_os())  # noqa: E501
         self.hardware_model_action_row.set_subtitle(
             system_information_provider.get_hardware_model()
+        )  # noqa: E501
+        self.board_asset_tag_action_row.set_subtitle(
+            system_information_provider.get_board_asset()
         )  # noqa: E501
         self.bios_action_row.set_subtitle(
             system_information_provider.get_bios_version()

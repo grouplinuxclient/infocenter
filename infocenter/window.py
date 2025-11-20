@@ -65,7 +65,7 @@ class Window(Adw.ApplicationWindow):
     pac_file_label = Gtk.Template.Child()
     vpn_label = Gtk.Template.Child()
 
-    def add_quicklinks(self):
+   def add_quicklinks(self):
         """
         Displays the configured quick actions in top flowbox.
         Configured in: /yaml/quicklinks.yaml
@@ -73,9 +73,12 @@ class Window(Adw.ApplicationWindow):
         resource = self.get_language_resource("quicklinks.yaml")
         if not resource:
             return
-
+ 
         quicklinks_yml = yaml.safe_load(resource.get_data())
-
+        if not quicklinks_yml:
+          self.quicklinks_group.set_visible(False)
+          return
+ 
         for entry in quicklinks_yml:
             self.flowbox.append(QuickLink(entry["uri"], entry["title"], entry["icon"]))
 

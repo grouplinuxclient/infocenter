@@ -76,8 +76,8 @@ class Window(Adw.ApplicationWindow):
  
         quicklinks_yml = yaml.safe_load(resource.get_data())
         if not quicklinks_yml:
-          self.quicklinks_group.set_visible(False)
-          return
+            self.quicklinks_group.set_visible(False)
+            return
  
         for entry in quicklinks_yml:
             self.flowbox.append(QuickLink(entry["uri"], entry["title"], entry["icon"]))

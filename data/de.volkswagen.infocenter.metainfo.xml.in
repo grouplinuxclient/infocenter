@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
   <id>de.volkswagen.infocenter.desktop</id>
+  <launchable type="desktop-id">de.volkswagen.infocenter.desktop</launchable>
+  <developer id="volkswagen">
+    <name>Jan-Michael Brummer</name>
+  </developer>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <content_rating type="oars-1.1" />
   <name>Information Center</name>
   <summary>Information Center</summary>
   <description>
-    <p>Information Center</p>
-    Information Center shows typical disclaimer and offers some quick link for user self support.
-    In addition the Information Center runs systems checks and provides an overview which services are working properly.
+    <p>The Information Center provides quick links for user self-support, and helps users understand the current status of their system.</p>
+    <p>It runs basic system checks and offers an overview of which services are working properly so that issues can be detected and resolved more easily.</p>
   </description>
   <url type="homepage">https://github.com/grouplinuxclient/infocenter/</url>
 </component>

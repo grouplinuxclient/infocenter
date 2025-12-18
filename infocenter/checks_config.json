@@ -1,0 +1,16 @@
+{
+  "plugins": [
+    {
+      "id": "zscaler",
+      "enabled": true
+    },
+    {
+      "id": "palo_alto",
+      "enabled": true
+    },
+    {
+      "id": "whatever",
+      "enabled": false
+    }
+  ]
+}

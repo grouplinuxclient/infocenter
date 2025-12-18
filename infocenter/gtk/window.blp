@@ -42,7 +42,7 @@ template $Window: Adw.ApplicationWindow {
         use-underline: true;
 
         child: Adw.PreferencesPage {
-          Adw.PreferencesGroup {
+          Adw.PreferencesGroup quicklinks_group{
             FlowBox flowbox {
               orientation: horizontal;
               row-spacing: 6;
@@ -131,49 +131,11 @@ template $Window: Adw.ApplicationWindow {
         icon-name: "test-symbolic";
         use-underline: true;
 
-        child: Adw.PreferencesPage {
-          Adw.PreferencesGroup proxy_preferences_group {
-            title: _("Zscaler Checks");
-            description: _("System checks whether the Zscaler is properly set up and running");
+        child: Adw.PreferencesPage system_checks_preference_page{
 
-            Adw.ActionRow {
-              title: _("Running");
-              subtitle: _("Check whether Zscaler is running");
-
-              [suffix]
-              Label zscaler_service_label {}
-            }
-
-            Adw.ActionRow {
-              title: _("Proxy");
-              subtitle: _("Check whether the proxy port is accessible");
-
-              [suffix]
-              Label proxy_port_label {}
-            }
-
-            Adw.ActionRow {
-              title: _("PAC-File");
-              subtitle: _("Check whether the PAC file is valid");
-
-              [suffix]
-              Label pac_file_label {}
-            }
-          }
-
-          Adw.PreferencesGroup vpn_preferences_group {
-            title: _("VPN Checks");
-            description: _("System checks whether VPN is correctly set up and running");
-
-            Adw.ActionRow {
-              title: _("VPN");
-
-              [suffix]
-              Label vpn_label {}
-            }
-          }
         };
       }
+
 
       Adw.ViewStackPage disclaimer_view_stack_page {
         name: "disclaimer";

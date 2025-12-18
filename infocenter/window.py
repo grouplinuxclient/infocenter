@@ -16,7 +16,9 @@ from gi.repository import Adw, Gio, GLib, Gtk  # noqa E402
 from infocenter.action_row import ActionRow  # noqa E402
 from infocenter.disclaimer import Disclaimer  # noqa E402
 from infocenter.quicklink import QuickLink  # noqa E402
-from infocenter import system_check, system_information_provider  # noqa E402
+from infocenter import system_information_provider  # noqa E402
+from infocenter.dynamic_system_checks import Dynamic_checks  # noqa E402
+
 
 from pathlib import Path  # noqa E402
 
@@ -36,6 +38,8 @@ class Window(Adw.ApplicationWindow):
 
     mail_action_row = Gtk.Template.Child()
     mail_link_button = Gtk.Template.Child()
+    quicklinks_group = Gtk.Template.Child()
+    system_checks_preference_page = Gtk.Template.Child()
 
     phone_action_row = Gtk.Template.Child()
     phone_link_button = Gtk.Template.Child()
@@ -59,12 +63,6 @@ class Window(Adw.ApplicationWindow):
     disclaimer_text_box = Gtk.Template.Child()
     autostart_checkbutton = Gtk.Template.Child()
 
-    # Checks
-    zscaler_service_label = Gtk.Template.Child()
-    proxy_port_label = Gtk.Template.Child()
-    pac_file_label = Gtk.Template.Child()
-    vpn_label = Gtk.Template.Child()
-
     def add_quicklinks(self):
         """
         Displays the configured quick actions in top flowbox.
@@ -78,7 +76,7 @@ class Window(Adw.ApplicationWindow):
         if not quicklinks_yml:
             self.quicklinks_group.set_visible(False)
             return
- 
+
         for entry in quicklinks_yml:
             self.flowbox.append(QuickLink(entry["uri"], entry["title"], entry["icon"]))
 
@@ -196,20 +194,9 @@ class Window(Adw.ApplicationWindow):
             self.autostart_checkbutton.set_visible(True)
 
     def add_tests(self):
-        """
-        Calls system checks and displays the result in the corresponding test entry
-        """
-        proxy = system_check.check_local_proxy_port()
-        self.set_test_value(self.proxy_port_label, proxy)
-
-        pac = system_check.check_pac_file()
-        self.set_test_value(self.pac_file_label, pac)
-
-        zscaler = system_check.check_zscaler_service()
-        self.set_test_value(self.zscaler_service_label, zscaler)
-
-        vpn = system_check.check_vpn()
-        self.set_test_value(self.vpn_label, vpn)
+        self.dynamic_checks.render(
+            self.system_checks_preference_page, self.set_test_value
+        )
 
     def set_test_value(self, label, value):
         """
@@ -279,5 +266,8 @@ class Window(Adw.ApplicationWindow):
         self.add_ehd()
         self.add_system_information()
         self.add_client_information()
+        # self.system_checks_ui_page = SystemChecksUIPage()
+        # self.system_checks_preference_page.add(self.system_checks_ui_page)
+        self.dynamic_checks = Dynamic_checks()
         self.add_disclaimer()
         self.add_tests()

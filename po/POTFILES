@@ -7,10 +7,11 @@ infocenter/edid.py
 infocenter/main.py
 infocenter/quicklink.py
 infocenter/system_information_provider.py
-infocenter/system_check.py
+infocenter/system_checks.py
 infocenter/window.py
 infocenter/gtk/action-row.blp
 infocenter/gtk/disclaimer.blp
 infocenter/gtk/quicklink.blp
 infocenter/gtk/window.blp
-infocenter/gtk/vpn_checks.blp
+infocenter/plugins/palo_alto_plugin.py
+infocenter/plugins/zscaler_plugin.py

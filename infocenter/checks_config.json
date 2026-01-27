@@ -7,10 +7,6 @@
     {
       "id": "palo_alto",
       "enabled": true
-    },
-    {
-      "id": "whatever",
-      "enabled": false
     }
   ]
 }

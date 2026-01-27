@@ -17,7 +17,8 @@ from infocenter.action_row import ActionRow  # noqa E402
 from infocenter.disclaimer import Disclaimer  # noqa E402
 from infocenter.quicklink import QuickLink  # noqa E402
 from infocenter import system_information_provider  # noqa E402
-from infocenter.dynamic_system_checks import Dynamic_checks  # noqa E402
+from infocenter.system_checks import get_config_path, _load_config, create_widgets  # noqa E402
+from infocenter.plugins.helper import set_test_value #noga E402
 
 
 from pathlib import Path  # noqa E402
@@ -193,24 +194,6 @@ class Window(Adw.ApplicationWindow):
             self.stack.set_visible_child_name("disclaimer")
             self.autostart_checkbutton.set_visible(True)
 
-    def add_tests(self):
-        self.dynamic_checks.render(
-            self.system_checks_preference_page, self.set_test_value
-        )
-
-    def set_test_value(self, label, value):
-        """
-        Args:
-            label (Adw.Label): Adwaita widget, whose text and CSS class is set
-            value (bool): Test-Value, which will be interpreted as successful or failed
-        """
-        if value:
-            label.set_label(_("Success"))
-            label.add_css_class("success")
-        else:
-            label.set_label(_("Failed"))
-            label.add_css_class("error")
-
     def _load_machine_info(self):
         try:
             with open("/etc/machine-info") as machine_info:
@@ -266,8 +249,8 @@ class Window(Adw.ApplicationWindow):
         self.add_ehd()
         self.add_system_information()
         self.add_client_information()
-        # self.system_checks_ui_page = SystemChecksUIPage()
-        # self.system_checks_preference_page.add(self.system_checks_ui_page)
-        self.dynamic_checks = Dynamic_checks()
+        config_path = get_config_path()
+        plugins_configs = _load_config(config_path)
+        create_widgets(plugins_configs, self.system_checks_preference_page, set_test_value,)
         self.add_disclaimer()
-        self.add_tests()
+

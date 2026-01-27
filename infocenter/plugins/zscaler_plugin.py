@@ -1,53 +1,18 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-import os
-import socket
 import gi
+import os
 import requests
+import socket
+
+from .helper import _check_service, _check_local_proxy_port, _check_pac_file, set_test_value
 from gettext import gettext as _
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gtk  # noqa: E402
 
-
-def _check_zscaler_service(service: str = "zsaservice") -> bool:
-    """
-    Checks with systemd if Zscaler service is running
-    """
-    try:
-        ret = os.system(f"systemctl is-active {service} > /dev/null")
-        return ret == 0
-    except FileNotFoundError:
-        return False
-
-
-def _check_local_proxy_port(port: int = 9000, ip: str = "127.0.0.1") -> bool:
-    """Checks if the local Zscaler proxy port is reachable."""
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    try:
-        return sock.connect_ex((ip, port)) == 0
-    finally:
-        try:
-            sock.close()
-        except Exception:
-            pass
-
-
-def _check_pac_file(port: int = 9000, ip: str = "127.0.0.1") -> bool:
-    """Checks for a valid PAC file endpoint.
-
-    This test will always fail if the local proxy port check fails.
-    """
-    if not _check_local_proxy_port(port=port, ip=ip):
-        return False
-
-    try:
-        response = requests.get(f"http://{ip}:{port}/localproxy", timeout=2).content
-        return bool(response)
-    except Exception:
-        return False
-
+#DISPLAY_NAME = "Zsclaer Client Conector"
 
 def _add_row(
     plugin_group: Adw.PreferencesGroup, title: str, subtitle: str
@@ -66,7 +31,7 @@ def _add_row(
 
 
 def add_to_preferences_page(
-    preference_page, set_test_value, plugin_type=None, display_name=None
+    set_test_value
 ):
     plugin_group = Adw.PreferencesGroup()
     plugin_group.set_title(_("Zscaler Client Connector"))
@@ -90,8 +55,7 @@ def add_to_preferences_page(
         _("Check whether the PAC file is valid"),
     )
 
-    preference_page.add(plugin_group)
-
-    set_test_value(running_label, _check_zscaler_service())
-    set_test_value(proxy_label, _check_local_proxy_port())
-    set_test_value(pac_label, _check_pac_file())
+    set_test_value(running_label, _check_service("zsaservice"))
+    set_test_value(proxy_label, _check_local_proxy_port(port = 9000, ip = "127.0.0.1"))
+    set_test_value(pac_label, _check_pac_file(port = 9000, ip = "127.0.0.1"))
+    return plugin_group

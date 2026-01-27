@@ -5,8 +5,7 @@ import gi
 import socket
 
 import yaml
-
-from gettext import gettext as _
+from infocenter.plugins.helper import set_test_value #noga E402
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
@@ -16,7 +15,10 @@ from gi.repository import Adw, Gio, GLib, Gtk  # noqa E402
 from infocenter.action_row import ActionRow  # noqa E402
 from infocenter.disclaimer import Disclaimer  # noqa E402
 from infocenter.quicklink import QuickLink  # noqa E402
-from infocenter import system_check, system_information_provider  # noqa E402
+from infocenter import system_information_provider  # noqa E402
+from infocenter.system_checks import get_config_path, _load_config, create_widgets  # noqa E402
+
+
 
 from pathlib import Path  # noqa E402
 
@@ -36,6 +38,8 @@ class Window(Adw.ApplicationWindow):
 
     mail_action_row = Gtk.Template.Child()
     mail_link_button = Gtk.Template.Child()
+    quicklinks_group = Gtk.Template.Child()
+    system_checks_preference_page = Gtk.Template.Child()
 
     phone_action_row = Gtk.Template.Child()
     phone_link_button = Gtk.Template.Child()
@@ -59,12 +63,6 @@ class Window(Adw.ApplicationWindow):
     disclaimer_text_box = Gtk.Template.Child()
     autostart_checkbutton = Gtk.Template.Child()
 
-    # Checks
-    zscaler_service_label = Gtk.Template.Child()
-    proxy_port_label = Gtk.Template.Child()
-    pac_file_label = Gtk.Template.Child()
-    vpn_label = Gtk.Template.Child()
-
     def add_quicklinks(self):
         """
         Displays the configured quick actions in top flowbox.
@@ -78,7 +76,7 @@ class Window(Adw.ApplicationWindow):
         if not quicklinks_yml:
             self.quicklinks_group.set_visible(False)
             return
- 
+
         for entry in quicklinks_yml:
             self.flowbox.append(QuickLink(entry["uri"], entry["title"], entry["icon"]))
 
@@ -195,35 +193,6 @@ class Window(Adw.ApplicationWindow):
             self.stack.set_visible_child_name("disclaimer")
             self.autostart_checkbutton.set_visible(True)
 
-    def add_tests(self):
-        """
-        Calls system checks and displays the result in the corresponding test entry
-        """
-        proxy = system_check.check_local_proxy_port()
-        self.set_test_value(self.proxy_port_label, proxy)
-
-        pac = system_check.check_pac_file()
-        self.set_test_value(self.pac_file_label, pac)
-
-        zscaler = system_check.check_zscaler_service()
-        self.set_test_value(self.zscaler_service_label, zscaler)
-
-        vpn = system_check.check_vpn()
-        self.set_test_value(self.vpn_label, vpn)
-
-    def set_test_value(self, label, value):
-        """
-        Args:
-            label (Adw.Label): Adwaita widget, whose text and CSS class is set
-            value (bool): Test-Value, which will be interpreted as successful or failed
-        """
-        if value:
-            label.set_label(_("Success"))
-            label.add_css_class("success")
-        else:
-            label.set_label(_("Failed"))
-            label.add_css_class("error")
-
     def _load_machine_info(self):
         try:
             with open("/etc/machine-info") as machine_info:
@@ -279,5 +248,8 @@ class Window(Adw.ApplicationWindow):
         self.add_ehd()
         self.add_system_information()
         self.add_client_information()
+        config_path = get_config_path()
+        plugins_configs = _load_config(config_path)
+        create_widgets(plugins_configs, self.system_checks_preference_page, set_test_value,)
         self.add_disclaimer()
-        self.add_tests()
+

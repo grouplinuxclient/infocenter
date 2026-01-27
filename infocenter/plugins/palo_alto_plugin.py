@@ -1,19 +1,12 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
-
-import os
-import socket
-
 import gi
 from gettext import gettext as _
+from .helper import _check_service, _check_interface
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from .helper import _check_service, _check_interface, set_test_value
+
 from gi.repository import Adw, Gtk  # noqa: E402
-
-#DISPLAY_NAME = "Palo Alto GlobalProtect"
-
-
 
 def _add_row(
     plugin_group: Adw.PreferencesGroup, title: str, subtitle: str

@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import os
 import socket
-from typing import Iterable, Sequence
+import requests
+from typing import Sequence
+from gettext import gettext as _
 
 
 def _check_service(service: str) -> bool:

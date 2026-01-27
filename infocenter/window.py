@@ -5,8 +5,7 @@ import gi
 import socket
 
 import yaml
-
-from gettext import gettext as _
+from infocenter.plugins.helper import set_test_value #noga E402
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
@@ -18,7 +17,7 @@ from infocenter.disclaimer import Disclaimer  # noqa E402
 from infocenter.quicklink import QuickLink  # noqa E402
 from infocenter import system_information_provider  # noqa E402
 from infocenter.system_checks import get_config_path, _load_config, create_widgets  # noqa E402
-from infocenter.plugins.helper import set_test_value #noga E402
+
 
 
 from pathlib import Path  # noqa E402

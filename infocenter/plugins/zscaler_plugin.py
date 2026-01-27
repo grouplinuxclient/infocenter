@@ -1,18 +1,15 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 import gi
-import os
-import requests
-import socket
-
-from .helper import _check_service, _check_local_proxy_port, _check_pac_file, set_test_value
+from .helper import _check_service, _check_local_proxy_port, _check_pac_file
 from gettext import gettext as _
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gtk  # noqa: E402
 
-#DISPLAY_NAME = "Zsclaer Client Conector"
+
+
 
 def _add_row(
     plugin_group: Adw.PreferencesGroup, title: str, subtitle: str
